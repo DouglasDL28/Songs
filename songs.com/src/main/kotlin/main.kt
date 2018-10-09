@@ -16,7 +16,7 @@ fun main (args: Array<String>) {
             "org.postgresql.Driver",
             "postgres",
             "Douglasdb"
-    )
+    ) // Conectarse a la base de datos.
 
     transaction {
         SchemaUtils.create(Library)
@@ -29,7 +29,7 @@ fun main (args: Array<String>) {
                     it[artistName] = x.artistName
                 }
             }
-        }
+        } // Agrega todas las canciones de el servidor.
 
         val mainMenu = """
         MENU:
@@ -67,8 +67,8 @@ fun main (args: Array<String>) {
                                 it[artistName] = x[Library.artistName]
                             }
                         }
-                    }
-                }
+                    } // Le da la opción de agregar una canción a favoritos por ID.
+                } // Buscar por nombre de canción.
 
                 2 -> {
                     print("Ingrese el nombre del artista: ")
@@ -92,17 +92,17 @@ fun main (args: Array<String>) {
                             }
                             }
                         }
-                    }
+                    } // Buscar por artista.
 
                 3 -> {
                     for(song in Favorites.selectAll()) {
                         println("${song[Favorites.id]}. ${song[Favorites.song]} by ${song[Favorites.artistName]}")
                     }
-                }
+                } // Ver canciones favoritas.
 
                 4 -> {
                     wantToContinue = false
-                } //Sale
+                } // Salir
             }
 
         } while (wantToContinue)
